@@ -1,0 +1,10 @@
+# Monthly pull request when either project branch has new commits.
+# Dependabot follows the branch set for each submodule in .gitmodules (bhg_prod, fqf_prod).
+version: 2
+updates:
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "submodules"

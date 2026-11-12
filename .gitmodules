@@ -1,0 +1,8 @@
+[submodule "bio_health_group_hd"]
+	path = bio_health_group_hd
+	url = https://github.com/the-naman/bio_health_group_hd.git
+	branch = bhg_prod
+[submodule "flexi_quant_finance_fd"]
+	path = flexi_quant_finance_fd
+	url = https://github.com/the-naman/flexi_quant_finance_fd.git
+	branch = fqf_prod
