@@ -11,6 +11,10 @@ An end-to-end **Databricks lakehouse** for a healthcare group (**Bio Health Grou
 
 The two folders above are Git submodules: links to the production branch of each repository. Nothing is copied; each project lives and changes only in its own repository.
 
+**Status:** live in dev, test and prod since 23 Oct 2026, with nightly runs, alerts and a weekly digest. **All data is synthetic.**
+
+**Live dashboard:** [lh.kumarnaman.com](https://lh.kumarnaman.com) shows the lakehouse working right now (counts only: rows per layer, runs, delays, failures, the payment stream).
+
 ## The problem
 
 A healthcare group acquired a lender. The parent had standard pipelines; the child's data was spread over 8 sources in 6 formats, messy and duplicated. The task: build the child's pipelines to the parent's standard, keep every company and environment isolated, protect personal data, and give the parent one trustworthy group view every night, with only code (never data) moving between environments.
@@ -55,13 +59,13 @@ Each company has `dev`, `test` and `prod` catalogs with `bronze`, `silver`, `gol
 | Group view | 401 people matched across the two companies (of 1,180); 352 of 381 hospital-bill payouts matched; intercompany money counted once |
 | Real time | Kafka → Structured Streaming → 10-minute windows → failed-payment velocity alert, mailed once |
 | Release safety | Pull requests with approval, 10 checks + tests + CodeQL, a hotfix path with back-merge proven in prod, Databricks Asset Bundle validated in CI |
-| Operations | Jobs as code on a nightly schedule, alerts and a weekly digest, runbook and disaster-recovery notes |
+| Operations | Jobs as code on a nightly schedule, on-time starts from a small timer server with GitHub schedules as fallback, retry after a timeout, HTML alerts and a weekly digest, a monitoring watchdog, runbook and disaster-recovery notes |
 | Performance | Prod daily runs 11–14 min → 7–10 min after measured tuning |
 | Security and privacy | Column masks, keyed tokens, row filters, service principals, secrets only in GitHub secrets and Databricks secret scopes. **All data is synthetic.** |
 
 ## Tech stack
 
-Databricks · PySpark · Spark SQL · Delta Lake · Unity Catalog · Auto Loader · Structured Streaming · Kafka · Amazon S3 · GitHub Actions · Databricks Asset Bundles · Python
+Databricks, PySpark, Spark SQL, Delta Lake, Unity Catalog, Auto Loader, Structured Streaming, Kafka, Amazon S3, AWS IAM, GitHub Actions, Databricks Asset Bundles, Python
 
 ## Get both projects
 
@@ -74,6 +78,7 @@ Already cloned? Run `git submodule update --init`. Each folder is a full checkou
 ## Read more
 
 - **Plain-language walkthrough with diagrams:** [How I turned two companies' messy data into one trusted picture](https://kumarnaman.com/blog/databricks-lakehouse-explained)
+- **Live dashboard:** [lh.kumarnaman.com](https://lh.kumarnaman.com)
 - **Portfolio:** [kumarnaman.com](https://kumarnaman.com)
 - **In each repository:** `docs/runbook.md`, `docs/disaster_recovery.md`, `docs/performance.md`, `docs/adr/` (decision records), `CHANGELOG.md`
 
